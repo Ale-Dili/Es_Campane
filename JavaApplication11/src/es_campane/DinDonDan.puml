@@ -1,0 +1,38 @@
+@startuml
+actor Utente
+participant main
+entity DatiCondivisi
+entity ThDIN
+entity ThDON
+entity ThDAN
+
+Utente -> main ++ : new
+
+main -> DatiCondivisi ** : new
+main -> ThDIN ** : new
+main -> ThDON ** : new
+main -> ThDAN ** : new
+
+main -> ThDIN ++ : start
+main -> ThDON ++ : start
+main -> ThDAN ++ : start
+
+Utente -> main : Premere invio
+
+ThDIN -> main : Interrupt
+deactivate ThDIN
+ThDON -> main : Interrupt
+deactivate ThDON
+ThDAN -> main : Interrupt
+deactivate ThDAN
+
+note over main : join ThDIN
+note over main : join ThDON
+note over main : join ThDAN
+
+Utente -> main : inserimento campana
+
+DatiCondivisi -> main : datiCondivisi.verificaSeHaiVinto(scelta)
+
+main -> Utente : termine programma
+@enduml
