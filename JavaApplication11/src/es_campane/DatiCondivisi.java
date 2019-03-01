@@ -28,6 +28,10 @@ public class DatiCondivisi {
     private Semaphore semDIN;
     private Semaphore semDON;
     private Semaphore semDAN;
+    
+    public Semaphore synDIN;
+    private Semaphore synDON;
+    private Semaphore synDAN;
 
     public DatiCondivisi() {
         this.schermo=new String [maxElem];
@@ -36,6 +40,10 @@ public class DatiCondivisi {
         semDIN = new Semaphore(0);
         semDON = new Semaphore(0);
         semDAN = new Semaphore(0);
+        
+        synDIN = new Semaphore(1);
+        synDON = new Semaphore(0);
+        synDAN = new Semaphore(0);
     }
 
     public DatiCondivisi(int contaDIN, int contaDON, int contaDAN) {
@@ -71,6 +79,31 @@ public class DatiCondivisi {
     public void SignalDAN() {
         semDAN.release();
     }
+    
+    public void WaitsynDIN() throws InterruptedException {
+        synDIN.acquire();
+    }
+    
+    public void WaitsynDON() throws InterruptedException {
+        synDON.acquire();
+    }
+    
+    public void WaitsynDAN() throws InterruptedException {
+        synDAN.acquire();
+    }
+    
+    public void SignalsynDIN() {
+        synDIN.release();
+    }
+    
+    public void SignalsynDON() {
+        synDON.release();
+    }
+    
+    public void SignalsynDAN() {
+        synDAN.release();
+    }
+    
 
     public synchronized int getContaDIN() {
         return contaDIN;
@@ -105,7 +138,7 @@ public class DatiCondivisi {
      * @return indica se hai vinto o no.
      * 
      */
-    public synchronized String verificaSeHaiVinto(int c) {
+   /* public synchronized String verificaSeHaiVinto(int c) {
         String x="Hai Perso";
         if(c==1 && contaDIN>contaDON && contaDIN>contaDAN) {
             x="Hai Vinto!";
@@ -117,14 +150,14 @@ public class DatiCondivisi {
             x="Hai Vinto!";
         }
         return x;
-    }
+    }*/
     public synchronized void aggiungi(String x) {
         if (p >= maxElem)
             p = 0;
         schermo[p]=x;
         p+=1;
     }
-    public synchronized void printSchermo() {
+ /*   public synchronized void printSchermo() {
         System.out.println("-------------------------------");
         for (int i = 0; i < p; i ++) {
             System.out.print(schermo[i] + " ");
@@ -132,5 +165,5 @@ public class DatiCondivisi {
                 System.out.println("");
         }
         System.out.println("\n-------------------------------");
-    }
+    }*/
 }

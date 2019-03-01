@@ -50,7 +50,7 @@ public class NBDinDonDan {
             
             boolean loop = true;
             while(loop){
-                dati.printSchermo();
+ //               dati.printSchermo();
                 interruzione = input.readLine();
 
                 if (interruzione.equals("")) {
@@ -62,7 +62,7 @@ public class NBDinDonDan {
             th2.interrupt();
             th3.interrupt();
             
-           dati.WaitDIN();
+            dati.WaitDIN();
             dati.WaitDON();
             dati.WaitDAN();
             //th1.join();
@@ -75,7 +75,7 @@ public class NBDinDonDan {
             System.out.println("2)DON");
             System.out.println("3)DAN");
             int scelta = scegli.nextInt();
-            System.out.println(dati.verificaSeHaiVinto(scelta));
+           /// System.out.println(dati.verificaSeHaiVinto(scelta));
             System.out.println("DIN:" + dati.getContaDIN());
             System.out.println("DON:" + dati.getContaDON());
             System.out.println("DAN:" + dati.getContaDAN());

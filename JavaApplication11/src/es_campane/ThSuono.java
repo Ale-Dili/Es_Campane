@@ -70,25 +70,50 @@ public class ThSuono extends Thread {
     public void run() {
         boolean verify = true;
         try {
+           
+            
             while (verify == true) {
-                if (faiSleep == true && faiYield == false) {
-                    System.out.println(suono);
+                
+                if (suono.equals("DIN")) {
+                    ptrdati.WaitsynDIN();
                 }
-                if (faiYield == true && faiSleep == true) {
-                    System.out.println(suono);
-                    yield();
+                
+                if (suono.equals("DON")) {
+                    ptrdati.WaitsynDON();
                 }
+                
+                if (suono.equals("DAN")) {
+                    ptrdati.WaitsynDAN();
+                }
+                
                 if (faiSleep == false && faiYield == true) {
-                    yield();
+                    //yield();
                     ptrdati.aggiungi(suono);
                     if (suono.equals("DIN")) {
+                        
+     
+                        //System.out.println(ptrdati.synDIN.getQueueLength());
                         ptrdati.setContaDIN(ptrdati.getContaDIN() + 1);
+                        
+                        System.out.println("DIN");
+                        ptrdati.SignalsynDON();
                     }
                     if (suono.equals("DON")) {
+                        
+                        //System.out.println(ptrdati.synDIN.getQueueLength());
                         ptrdati.setContaDON(ptrdati.getContaDON() + 1);
+                        
+                        System.out.println("DON");
+                        ptrdati.SignalsynDAN();
                     }
                     if (suono.equals("DAN")) {
+                        
+                        //System.out.println(ptrdati.synDIN.getQueueLength());
                         ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
+                        
+                        System.out.println("DAN");
+                        System.out.println("----------");
+                        ptrdati.SignalsynDIN();
                     }
                 }
                 int min = 100;
