@@ -26,9 +26,9 @@ deactivate ThDON
 ThDAN -> main : Interrupt
 deactivate ThDAN
 
-note over main : join ThDIN
-note over main : join ThDON
-note over main : join ThDAN
+note over main : sem ThDIN
+note over main : sem ThDON
+note over main : sem ThDAN
 
 Utente -> main : inserimento campana
 
